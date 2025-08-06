@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lab Program 2</title>
+</head>
+
+<body>
+    <h2>Student Information</h2>
+    <div id="output"></div>
+    <script>
+        const student = {
+            name: "Rahul",
+            grade: 40,
+            subjects: ["FSD", "RM", "DBMS"],
+            displayInfo: function () {
+                return "Name: " + this.name + "<br>" +
+                    "Grade: " + this.grade + "<br>" +
+                    "Subjects: " + this.subjects.join(", ") + "<br>";
+            }
+        };
+        function addPassedProperty(obj) {
+            obj.passed = obj.grade >= 50;
+        }
+        addPassedProperty(student);
+        let result = "<strong>Display Info:</strong><br>" + student.displayInfo();
+
+        result += "<br><strong>All Properties:</strong><br>";
+        for (let key in student) {
+            if (typeof student[key] !== 'function') {
+                result += key + ": " + student[key] + "<br>";
+            }
+        }
+        document.getElementById("output").innerHTML = result;
+    </script>
+</body>
+
+</html>
