@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Delegation & DOM Manipulation</title>
+    <style>
+        li {
+            cursor: pointer;
+            margin: 5px;
+            padding: 5px;
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Event Delegation & DOM Manipulation Example</h2>
+    <ul id="parentList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <button id="addBtn">Add Item</button>
+    <button id="removeBtn">Remove Last Item</button>
+    <button id="accessBtn">Access 1st Item</button>
+    <p id="output"></p>
+    <script>
+        const parentList = document.getElementById("parentList");
+        const output = document.getElementById("output");
+        // Event delegation
+        parentList.addEventListener("click", function (event) {
+            if (event.target && event.target.nodeName === "LI") {
+                output.textContent = "You clicked on: " + event.target.textContent;
+            }
+        });
+        // Create node
+        document.getElementById("addBtn").addEventListener("click", function () {
+            let newItem = document.createElement("li");
+            newItem.textContent = "New Item " + (parentList.children.length + 1);
+            parentList.appendChild(newItem);
+        });
+
+        // Remove node
+        document.getElementById("removeBtn").addEventListener("click", function () {
+            if (parentList.lastElementChild) {
+                parentList.removeChild(parentList.lastElementChild);
+            }
+            else {
+                output.textContent = "No items left to remove!";
+            }
+        });
+        
+        // Access node
+        document.getElementById("accessBtn").addEventListener("click", function () {
+            if (parentList.firstElementChild) {
+                output.textContent = "First item is: " + parentList.firstElementChild.textContent;
+            }
+            else {
+                output.textContent = "List is empty!";
+            }
+        });
+    </script>
+</body>
+
+</html>
